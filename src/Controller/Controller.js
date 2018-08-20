@@ -11,7 +11,7 @@ class Controller {
 
   savePlateauInformation(plateauSizing) {
     if (!isValidCoordinateInput(plateauSizing)) {
-      throw Error("Invalid Plateau Size!");
+      throw new Error("Invalid Plateau Size!");
     }
 
     const sizeArray = plateauSizing.split(" ");
@@ -23,7 +23,7 @@ class Controller {
 
   addNewRoverWithInitialPosition(position) {
     if (!isValidInitialPositionInput(position)) {
-      throw Error("Invalid Initial Position!");
+      throw new Error("Invalid Initial Position!");
     }
 
     const positionArray = position.split(" ");
