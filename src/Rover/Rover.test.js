@@ -73,5 +73,33 @@ describe("Instructions", () => {
       });
   });
 
-  describe.skip("process M instructions", () => {});
+  describe("M:", () => {
+    it("current orientation: N", () => {
+        let rover = new Rover(0, 0, "N");
+        rover.processInstruction("M");
+  
+        expect(rover.printCurrentPosition()).toBe("0 1 N");
+      });
+  
+      it("current orientation: S", () => {
+        let rover = new Rover(0, 1, "S");
+        rover.processInstruction("M");
+  
+        expect(rover.printCurrentPosition()).toBe("0 0 S");
+      });
+  
+      it("current orientation: E", () => {
+        let rover = new Rover(0, 0, "E");
+        rover.processInstruction("M");
+  
+        expect(rover.printCurrentPosition()).toBe("1 0 E");
+      });
+  
+      it("current orientation: W", () => {
+        let rover = new Rover(1, 0, "W");
+        rover.processInstruction("M");
+  
+        expect(rover.printCurrentPosition()).toBe("0 0 W");
+      });
+  });
 });

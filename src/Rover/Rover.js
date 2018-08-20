@@ -19,6 +19,9 @@ class Rover {
       case "R":
         this.rotateRight();
         break;
+      case "M":
+        this.move();
+        break;
       default:
         throw new Error("Invalid instruction");
     }
@@ -54,6 +57,23 @@ class Rover {
         break;
       case orientation.WEST:
         this.orientation = orientation.NORTH;
+        break;
+    }
+  }
+
+  move() {
+    switch (this.orientation) {
+      case orientation.NORTH:
+        this.y += 1;
+        break;
+        case orientation.SOUTH:
+        this.y -= 1;
+        break;
+        case orientation.EAST:
+        this.x += 1;
+        break;
+        case orientation.WEST:
+        this.x -= 1;
         break;
     }
   }
