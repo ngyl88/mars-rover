@@ -1,10 +1,22 @@
 const { getUserInput, rl } = require("./readline-helper");
+const Controller = require('./src/Controller/Controller');
 
 const main = async () => {
-  const x = await getUserInput(
-    "Specify the size of the Mars plateau (e.g. 5 5):"
-  );
-  console.log("x is", x);
+  const controller = new Controller();
+
+  let isPlateauCreated = false;
+  while(!isPlateauCreated) {
+    const x = await getUserInput(
+      "Specify the size of the Mars plateau (e.g. 5 5):"
+    );
+    console.log("x is", x);
+    try {
+      controller.validateAndSavePlateauInformation(x);
+      isPlateauCreated = true;
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
 
   const y = await getUserInput(
     "Specify the initial coordinates and direction of the mars rover (e.g. 1 2 N):"
