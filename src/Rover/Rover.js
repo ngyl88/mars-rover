@@ -1,4 +1,4 @@
-const orientation = require("../orientation");
+const { NORTH, SOUTH, EAST, WEST } = require("../orientation");
 const { readInstructionsToArray } = require("../utils");
 
 class Rover {
@@ -37,50 +37,50 @@ class Rover {
 
   rotateLeft() {
     switch (this.orientation) {
-      case orientation.NORTH:
-        this.orientation = orientation.WEST;
+      case NORTH:
+        this.orientation = WEST;
         break;
-      case orientation.SOUTH:
-        this.orientation = orientation.EAST;
+      case SOUTH:
+        this.orientation = EAST;
         break;
-      case orientation.EAST:
-        this.orientation = orientation.NORTH;
+      case EAST:
+        this.orientation = NORTH;
         break;
-      case orientation.WEST:
-        this.orientation = orientation.SOUTH;
+      case WEST:
+        this.orientation = SOUTH;
         break;
     }
   }
 
   rotateRight() {
     switch (this.orientation) {
-      case orientation.NORTH:
-        this.orientation = orientation.EAST;
+      case NORTH:
+        this.orientation = EAST;
         break;
-      case orientation.SOUTH:
-        this.orientation = orientation.WEST;
+      case SOUTH:
+        this.orientation = WEST;
         break;
-      case orientation.EAST:
-        this.orientation = orientation.SOUTH;
+      case EAST:
+        this.orientation = SOUTH;
         break;
-      case orientation.WEST:
-        this.orientation = orientation.NORTH;
+      case WEST:
+        this.orientation = NORTH;
         break;
     }
   }
 
   move() {
     switch (this.orientation) {
-      case orientation.NORTH:
+      case NORTH:
         this.y += 1;
         break;
-      case orientation.SOUTH:
+      case SOUTH:
         this.y -= 1;
         break;
-      case orientation.EAST:
+      case EAST:
         this.x += 1;
         break;
-      case orientation.WEST:
+      case WEST:
         this.x -= 1;
         break;
     }
