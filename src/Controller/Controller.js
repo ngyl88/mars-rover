@@ -1,4 +1,7 @@
-const { getCoordinateFromString, isValidInitialPositionInput } = require("../utils");
+const {
+  getCoordinateFromString,
+  getCoordinateAndOrientationFromString
+} = require("../utils");
 
 const Plateau = require("../Plateau/Plateau");
 const Rover = require("../Rover/Rover");
@@ -15,15 +18,12 @@ class Controller {
   }
 
   addNewRoverWithInitialPosition(position) {
-    if (!isValidInitialPositionInput(position)) {
-      throw new Error("Invalid Initial Position!");
-    }
+    const translated = getCoordinateAndOrientationFromString(position);
 
-    const positionArray = position.split(" ");
-    const x = Number.parseInt(positionArray[0]);
-    const y = Number.parseInt(positionArray[1]);
-    const orientation = positionArray[2];
-    this.rovers.push(new Rover(x, y, orientation));
+    const coordinate = translated.coordinate;
+    const orientation = translated.orientation;
+
+    this.rovers.push(new Rover(coordinate.x, coordinate.y, orientation));
   }
 }
 

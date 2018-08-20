@@ -1,7 +1,7 @@
 const {
   readInstructionsToArray,
   getCoordinateFromString,
-  isValidInitialPositionInput
+  getCoordinateAndOrientationFromString
 } = require("./utils");
 
 describe("readInstructionsToArray", () => {
@@ -19,27 +19,34 @@ describe("getCoordinateFromString", () => {
 
   describe("invalid input", () => {
     it("if size have more than 2 spaces", () => {
-      expect(() => getCoordinateFromString("5 5 5")).toThrowError("Invalid");
+      const testFunc = () => getCoordinateFromString("5 5 5");
+      expect(testFunc).toThrowError("Invalid");
     });
   });
 });
 
-describe("isValidInitialPositionInput", () => {
-  it("if valid, should return true if initial position is valid", () => {
-    expect(isValidInitialPositionInput("1 2 N")).toEqual(true);
+describe("getCoordinateAndOrientationFromString", () => {
+  it("if valid, should return coordinate and orientation", () => {
+    expect(getCoordinateAndOrientationFromString("1 2 N")).toEqual({
+      coordinate: { x: 1, y: 2 },
+      orientation: "N"
+    });
   });
 
   describe("invalid input", () => {
-    it("should return false if position entered not having 2 spaces", () => {
-      expect(isValidInitialPositionInput("1 2 N N")).toEqual(false);
+    it("if position entered not having 2 spaces", () => {
+      const testFunc = () => getCoordinateAndOrientationFromString("1 2 N N");
+      expect(testFunc).toThrowError("Invalid");
     });
 
     it("if position does not start with a valid coordinates", () => {
-      expect(() => isValidInitialPositionInput("N 2 N")).toThrowError("Invalid");
+      const testFunc = () => getCoordinateAndOrientationFromString("N 2 N");
+      expect(testFunc).toThrowError("Invalid");
     });
 
-    it("should return false if position does not end with a valid orientation", () => {
-      expect(isValidInitialPositionInput("2 2 NH")).toEqual(false);
+    it("if position does not end with a valid orientation", () => {
+      const testFunc = () => getCoordinateAndOrientationFromString("5 5 SW");
+      expect(testFunc).toThrowError("Invalid");
     });
   });
 });
