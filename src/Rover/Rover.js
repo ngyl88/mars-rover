@@ -10,8 +10,25 @@ class Rover {
   }
 
   processInstruction(instruction) {
-    if (this.orientation === "N" && instruction === "L") {
-      this.orientation = "W";
+    if (instruction === "L") {
+      this.rotateLeft();
+    }
+  }
+
+  rotateLeft() {
+    switch (this.orientation) {
+      case "N":
+        this.orientation = "W";
+        break;
+      case "S":
+        this.orientation = "E";
+        break;
+      case "E":
+        this.orientation = "N";
+        break;
+      case "W":
+        this.orientation = "S";
+        break;
     }
   }
 }

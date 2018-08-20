@@ -20,12 +20,26 @@ describe("Instructions", () => {
 
       expect(rover.printCurrentPosition()).toBe("0 0 W");
     });
-    
-    it.skip("current orientation: S", () => {
+
+    it("current orientation: S", () => {
       let rover = new Rover(0, 0, "S");
       rover.processInstruction("L");
 
       expect(rover.printCurrentPosition()).toBe("0 0 E");
+    });
+
+    it("current orientation: E", () => {
+      let rover = new Rover(0, 0, "E");
+      rover.processInstruction("L");
+
+      expect(rover.printCurrentPosition()).toBe("0 0 N");
+    });
+
+    it("current orientation: W", () => {
+      let rover = new Rover(0, 0, "W");
+      rover.processInstruction("L");
+
+      expect(rover.printCurrentPosition()).toBe("0 0 S");
     });
   });
 
