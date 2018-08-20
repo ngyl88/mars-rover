@@ -28,8 +28,9 @@ const main = async () => {
   console.log("z is", z);
 
   // TODO: include the functions that you've implemented for this kata
+  // TODO: validate instructions
   controller.addNewRoverWithInitialPosition(y);
-  // controller.sendInstructions(z);
+  controller.sendInstructionsToLastAddedRover(z);
 
   console.log(
     "The final coordinates of the mars rover is: <replace with the output of your program>"

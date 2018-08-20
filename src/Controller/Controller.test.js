@@ -19,3 +19,16 @@ it("addNewRoverWithInitialPosition", () => {
 
   expect(controller.rovers.length).toEqual(1);
 });
+
+it("sendInstructionsToLastAddedRover", () => {
+  const controller = new Controller();
+  controller.addNewRoverWithInitialPosition("1 2 N");
+
+  expect(controller.rovers.length).toEqual(1);
+
+  const instruction = "LMLMLMLMM";
+  const spy = jest.spyOn(controller.rovers[0], "receiveInstructions");
+
+  controller.sendInstructionsToLastAddedRover(instruction);
+  expect(spy).toBeCalledWith(instruction);
+});

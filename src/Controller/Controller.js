@@ -25,6 +25,10 @@ class Controller {
 
     this.rovers.push(new Rover(coordinate.x, coordinate.y, orientation));
   }
+
+  sendInstructionsToLastAddedRover(instructions) {
+    this.rovers[this.rovers.length - 1].receiveInstructions(instructions);
+  }
 }
 
 module.exports = Controller;
