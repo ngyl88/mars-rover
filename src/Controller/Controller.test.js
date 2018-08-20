@@ -32,3 +32,12 @@ it("sendInstructionsToLastAddedRover", () => {
   controller.sendInstructionsToLastAddedRover(instruction);
   expect(spy).toBeCalledWith(instruction);
 });
+
+it("printRoverPositions", () => {
+  const controller = new Controller();
+  controller.addNewRoverWithInitialPosition("1 2 N");
+  controller.addNewRoverWithInitialPosition("3 4 E");
+
+  const output = controller.printRoverPositions();
+  expect(output).toMatch(`rover[0]: 1 2 N\nrover[1]: 3 4 E\n`);
+});

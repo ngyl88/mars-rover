@@ -1,11 +1,11 @@
 const { getUserInput, rl } = require("./readline-helper");
-const Controller = require('./src/Controller/Controller');
+const Controller = require("./src/Controller/Controller");
 
 const main = async () => {
   const controller = new Controller();
 
   let isPlateauCreated = false;
-  while(!isPlateauCreated) {
+  while (!isPlateauCreated) {
     const plateauSizeInput = await getUserInput(
       "Specify the size of the Mars plateau (e.g. 5 5):"
     );
@@ -32,9 +32,8 @@ const main = async () => {
   controller.addNewRoverWithInitialPosition(y);
   controller.sendInstructionsToLastAddedRover(z);
 
-  console.log(
-    "The final coordinates of the mars rover is: <replace with the output of your program>"
-  );
+  console.log("The final coordinates of the mars rover is: ");
+  controller.printRoverPositions();
 
   rl.close();
 };
