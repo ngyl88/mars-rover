@@ -1,4 +1,4 @@
-const { readInstructionsToArray, isValidPlateauInput } = require("./utils");
+const { readInstructionsToArray, isValidCoordinateInput } = require("./utils");
 
 describe("readInstructionsToArray", () => {
   it("should split a series of instructions into each instruction", () => {
@@ -8,12 +8,12 @@ describe("readInstructionsToArray", () => {
   it.skip("invalid instructions", () => {});
 });
 
-describe("isValidPlateauInput", () => {
+describe("isValidCoordinateInput", () => {
   it("should return true if sizing is valid", () => {
-    expect(isValidPlateauInput("5 5")).toEqual(true);
+    expect(isValidCoordinateInput("5 5")).toEqual(true);
   });
 
   it("should return false if size have more than 2 spaces", () => {
-    expect(isValidPlateauInput("5 5 5")).toEqual(false);
+    expect(isValidCoordinateInput("5 5 5")).toEqual(false);
   });
 });

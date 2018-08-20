@@ -1,6 +1,7 @@
-const { isValidPlateauInput } = require("../utils");
+const { isValidCoordinateInput } = require("../utils");
 
 const Plateau = require("../Plateau/Plateau");
+const Rover = require("../Rover/Rover");
 
 class Controller {
   constructor() {
@@ -9,9 +10,10 @@ class Controller {
   }
 
   validateAndSavePlateauInformation(plateauSizing) {
-    if (!isValidPlateauInput(plateauSizing)) {
+    if (!isValidCoordinateInput(plateauSizing)) {
       throw Error("Invalid Plateau Size!");
     }
+
     const sizeArray = plateauSizing.split(" ");
     const x = Number.parseInt(sizeArray[0]);
     const y = Number.parseInt(sizeArray[1]);

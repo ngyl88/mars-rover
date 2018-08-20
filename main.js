@@ -6,12 +6,11 @@ const main = async () => {
 
   let isPlateauCreated = false;
   while(!isPlateauCreated) {
-    const x = await getUserInput(
+    const plateauSizeInput = await getUserInput(
       "Specify the size of the Mars plateau (e.g. 5 5):"
     );
-    console.log("x is", x);
     try {
-      controller.validateAndSavePlateauInformation(x);
+      controller.validateAndSavePlateauInformation(plateauSizeInput);
       isPlateauCreated = true;
     } catch (err) {
       console.error(err.message);

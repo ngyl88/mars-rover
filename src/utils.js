@@ -2,7 +2,7 @@ const readInstructionsToArray = string => {
   return string.split("");
 };
 
-const isValidPlateauInput = inputString => {
+const isValidCoordinateInput = inputString => {
   const inputArray = inputString.split(" ");
   if (inputArray.length != 2) {
     return false;
@@ -17,5 +17,5 @@ const isValidPlateauInput = inputString => {
 
 module.exports = {
   readInstructionsToArray,
-  isValidPlateauInput
+  isValidCoordinateInput
 };
