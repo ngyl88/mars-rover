@@ -10,7 +10,7 @@ const main = async () => {
       "Specify the size of the Mars plateau (e.g. 5 5):"
     );
     try {
-      controller.validateAndSavePlateauInformation(plateauSizeInput);
+      controller.savePlateauInformation(plateauSizeInput);
       isPlateauCreated = true;
     } catch (err) {
       console.error(err.message);
@@ -28,6 +28,8 @@ const main = async () => {
   console.log("z is", z);
 
   // TODO: include the functions that you've implemented for this kata
+  controller.addNewRoverWithInitialPosition(y);
+  // controller.sendInstructions(z);
 
   console.log(
     "The final coordinates of the mars rover is: <replace with the output of your program>"
