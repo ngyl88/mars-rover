@@ -6,20 +6,11 @@ it("Controller constructor", () => {
   expect(controller.rovers.length).toBe(0);
 });
 
-describe("savePlateauInformation", () => {
-  it("valid input", () => {
-    const controller = new Controller();
-    controller.savePlateauInformation("5 5");
+it("savePlateauInformation", () => {
+  const controller = new Controller();
+  controller.savePlateauInformation("5 5");
 
-    expect(controller.plateau).not.toEqual({});
-  });
-
-  it("invalid input", () => {
-    const controller = new Controller();
-    const saveInvalidPlateauSize = () => controller.savePlateauInformation("X 5");
-
-    expect(saveInvalidPlateauSize).toThrowError("Invalid");
-  });
+  expect(controller.plateau).not.toEqual({});
 });
 
 describe("addNewRoverWithInitialPosition", () => {
@@ -32,7 +23,8 @@ describe("addNewRoverWithInitialPosition", () => {
 
   it("invalid input", () => {
     const controller = new Controller();
-    const addRoverWithInvalidInitialPosition = () => controller.addNewRoverWithInitialPosition("5 5 SW");
+    const addRoverWithInvalidInitialPosition = () =>
+      controller.addNewRoverWithInitialPosition("5 5 SW");
 
     expect(addRoverWithInvalidInitialPosition).toThrowError("Invalid");
   });

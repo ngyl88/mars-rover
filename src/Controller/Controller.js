@@ -1,4 +1,4 @@
-const { isValidCoordinateInput, isValidInitialPositionInput } = require("../utils");
+const { getCoordinateFromString, isValidInitialPositionInput } = require("../utils");
 
 const Plateau = require("../Plateau/Plateau");
 const Rover = require("../Rover/Rover");
@@ -10,15 +10,8 @@ class Controller {
   }
 
   savePlateauInformation(plateauSizing) {
-    if (!isValidCoordinateInput(plateauSizing)) {
-      throw new Error("Invalid Plateau Size!");
-    }
-
-    const sizeArray = plateauSizing.split(" ");
-    const x = Number.parseInt(sizeArray[0]);
-    const y = Number.parseInt(sizeArray[1]);
-
-    this.plateau = new Plateau(x, y);
+    const maxCoordinate = getCoordinateFromString(plateauSizing);
+    this.plateau = new Plateau(maxCoordinate.x, maxCoordinate.y);
   }
 
   addNewRoverWithInitialPosition(position) {

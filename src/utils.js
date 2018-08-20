@@ -4,19 +4,28 @@ const readInstructionsToArray = string => {
   return string.split("");
 };
 
-const isValidCoordinateInput = inputString => {
+const extractCoordinatesFromString = coordinateString => {
+  const inputArray = coordinateString.split(" ");
+
+  return {
+    x: Number.parseInt(inputArray[0]),
+    y: Number.parseInt(inputArray[1])
+  }
+};
+
+const getCoordinateFromString = inputString => {
+  const error = new Error("Invalid Coordinate!");
+
   const inputArray = inputString.split(" ");
   if (inputArray.length != 2) {
-    return false;
+    throw error;
   }
 
-  const x = Number.parseInt(inputArray[0]);
-  const y = Number.parseInt(inputArray[1]);
-
-  if (isNaN(x) || isNaN(y)) {
-    return false;
+  const coordinate = extractCoordinatesFromString(inputString);
+  if (isNaN(coordinate.x) || isNaN(coordinate.y)) {
+    throw error;
   }
-  return true;
+  return coordinate;
 };
 
 const isValidOrientation = orientation => {
@@ -32,11 +41,20 @@ const isValidInitialPositionInput = positionString => {
   }
 
   const coordinates = positionString.slice(0, positionString.lastIndexOf(" "));
-  return isValidCoordinateInput(coordinates);
+  return getCoordinateFromString(coordinates) != undefined;
 };
+
+// const extractCoordinatesAndOrientationFromString = positionString => {
+//   const inputArray = positionString.split(" ");
+//   return {
+//     coordinate: extractCoordinatesFromString(positionString.slice(0, positionString.lastIndexOf(" "))),
+//     orientation: inputArray[2]
+//   }
+// };
 
 module.exports = {
   readInstructionsToArray,
-  isValidCoordinateInput,
-  isValidInitialPositionInput
+  getCoordinateFromString,
+  isValidInitialPositionInput,
+  // extractCoordinatesAndOrientationFromString
 };
