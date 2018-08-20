@@ -33,7 +33,7 @@ class Controller {
   printRoverPositions() {
     let output = "";
     this.rovers.forEach((rover, index) => {
-      const roverDescription = `rover[${index}]: ${rover.printCurrentPosition()}\n`;
+      const roverDescription = `\trover[${index}]: ${rover.printCurrentPosition()}\n`;
       output += roverDescription;
     });
     return output;

@@ -9,7 +9,9 @@ describe("readInstructionsToArray", () => {
     expect(readInstructionsToArray("LMR")).toEqual(["L", "M", "R"]);
   });
 
-  it.skip("invalid instructions", () => {});
+  it.skip("invalid instructions", () => {
+    expect(1).toBe(1);
+  });
 });
 
 describe("getCoordinateFromString", () => {

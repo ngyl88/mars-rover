@@ -39,5 +39,5 @@ it("printRoverPositions", () => {
   controller.addNewRoverWithInitialPosition("3 4 E");
 
   const output = controller.printRoverPositions();
-  expect(output).toMatch(`rover[0]: 1 2 N\nrover[1]: 3 4 E\n`);
+  expect(output).toMatch(`\trover[0]: 1 2 N\n\trover[1]: 3 4 E\n`);
 });

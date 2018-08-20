@@ -4,6 +4,7 @@ const Controller = require("./src/Controller/Controller");
 const main = async () => {
   const controller = new Controller();
 
+  // TODO test for while loop?
   let isPlateauCreated = false;
   while (!isPlateauCreated) {
     const plateauSizeInput = await getUserInput(
@@ -17,23 +18,30 @@ const main = async () => {
     }
   }
 
-  const y = await getUserInput(
-    "Specify the initial coordinates and direction of the mars rover (e.g. 1 2 N):"
+  // TODO test for while loop?
+  let toCreateAnotherRover = true;
+  while (toCreateAnotherRover) {
+    const initialPosition = await getUserInput(
+      "Specify the initial coordinates and direction of the mars rover (e.g. 1 2 N):"
+    );
+
+    const instructions = await getUserInput(
+      "Specify the instructions for the mars rover (e.g. LMLMLMLMM):"
+    );
+
+    // TODO: include the functions that you've implemented for this kata
+    // TODO: validate instructions
+    controller.addNewRoverWithInitialPosition(initialPosition);
+    controller.sendInstructionsToLastAddedRover(instructions);
+
+    const anotherRover = await getUserInput("Another mars rover (Y/N)? ");
+    toCreateAnotherRover = anotherRover === "Y";
+  }
+
+  console.log(
+    "The final coordinates of the mars rover is: \n",
+    controller.printRoverPositions()
   );
-  console.log("y is", y);
-
-  const z = await getUserInput(
-    "Specify the instructions for the mars rover (e.g. LMLMLMLMM):"
-  );
-  console.log("z is", z);
-
-  // TODO: include the functions that you've implemented for this kata
-  // TODO: validate instructions
-  controller.addNewRoverWithInitialPosition(y);
-  controller.sendInstructionsToLastAddedRover(z);
-
-  console.log("The final coordinates of the mars rover is: ");
-  controller.printRoverPositions();
 
   rl.close();
 };
