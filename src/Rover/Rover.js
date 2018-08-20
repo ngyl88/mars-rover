@@ -1,4 +1,5 @@
 const orientation = require("../orientation");
+const { readInstructionsToArray } = require("../utils");
 
 class Rover {
   constructor(x, y, orientation) {
@@ -9,6 +10,13 @@ class Rover {
 
   printCurrentPosition() {
     return `${this.x} ${this.y} ${this.orientation}`;
+  }
+
+  receiveInstructions(instructions) {
+    const instructionArray = readInstructionsToArray(instructions);
+    instructionArray.forEach(instruction => {
+      this.processInstruction(instruction);
+    });
   }
 
   processInstruction(instruction) {
@@ -66,13 +74,13 @@ class Rover {
       case orientation.NORTH:
         this.y += 1;
         break;
-        case orientation.SOUTH:
+      case orientation.SOUTH:
         this.y -= 1;
         break;
-        case orientation.EAST:
+      case orientation.EAST:
         this.x += 1;
         break;
-        case orientation.WEST:
+      case orientation.WEST:
         this.x -= 1;
         break;
     }
