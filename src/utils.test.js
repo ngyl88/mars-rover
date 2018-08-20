@@ -2,6 +2,10 @@ const { readInstructionsToArray } = require("./utils");
 
 describe("readInstructionsToArray", () => {
   it("should split a series of instructions into each instruction", () => {
-    expect(readInstructionsToArray("LML")).toEqual(["L", "M", "L"]);
+    expect(readInstructionsToArray("LMR")).toEqual(["L", "M", "R"]);
   });
+
+  it.skip('invalid instructions', () => {
+
+  })
 });
