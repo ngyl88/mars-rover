@@ -1,4 +1,4 @@
-const orientationObject = require("./orientation");
+const { isValidOrientation } = require("./orientation");
 
 const readInstructionsToArray = string => {
   return string.split("");
@@ -26,11 +26,6 @@ const getCoordinateFromString = inputString => {
     throw error;
   }
   return coordinate;
-};
-
-const isValidOrientation = orientation => {
-  const validOrientation = Object.values(orientationObject);
-  return validOrientation.indexOf(orientation) !== -1;
 };
 
 const isValidInitialPositionInput = positionString => {
