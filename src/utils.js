@@ -22,18 +22,18 @@ const isValidCoordinateInput = inputString => {
 const isValidOrientation = orientation => {
   const validOrientation = Object.values(orientationObject);
   return validOrientation.indexOf(orientation) !== -1;
-}
+};
 
 const isValidInitialPositionInput = positionString => {
   const inputArray = positionString.split(" ");
-  if (inputArray.length != 3) {
+
+  if (inputArray.length != 3 || !isValidOrientation(inputArray[2])) {
     return false;
   }
 
-  const coordinates = positionString.slice(0, positionString.lastIndexOf(' '));
-  if(!isValidCoordinateInput(coordinates)) return false;
-  return isValidOrientation(inputArray[2]);
-}
+  const coordinates = positionString.slice(0, positionString.lastIndexOf(" "));
+  return isValidCoordinateInput(coordinates);
+};
 
 module.exports = {
   readInstructionsToArray,
