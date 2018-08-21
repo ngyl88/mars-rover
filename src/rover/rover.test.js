@@ -12,7 +12,7 @@ it("printCurrentPosition()", () => {
   expect(rover.printCurrentPosition()).toBe("0 0 N");
 });
 
-describe("Single Instruction", () => {
+describe("processInstruction - Single Instruction", () => {
   describe("L:", () => {
     it("current orientation: N", () => {
       let rover = new Rover(0, 0, "N");
@@ -101,14 +101,5 @@ describe("Single Instruction", () => {
 
       expect(rover.printCurrentPosition()).toBe("0 0 W");
     });
-  });
-});
-
-describe("Multiple Instructions", () => {
-  it("rover #1", () => {
-    const rover = new Rover(1, 2, "N");
-    rover.receiveInstructions("LMLMLMLMM");
-
-    expect(rover.printCurrentPosition()).toBe("1 3 N");
   });
 });

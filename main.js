@@ -30,7 +30,6 @@ const main = async () => {
     );
 
     // TODO: include the functions that you've implemented for this kata
-    // TODO: validate instructions
     controller.addNewRoverWithInitialPosition(initialPosition);
     controller.sendInstructionsToLastAddedRover(instructions);
 

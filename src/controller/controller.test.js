@@ -20,17 +20,25 @@ it("addNewRoverWithInitialPosition", () => {
   expect(controller.rovers.length).toEqual(1);
 });
 
-it("sendInstructionsToLastAddedRover", () => {
-  const controller = new Controller();
-  controller.addNewRoverWithInitialPosition("1 2 N");
+describe("sendInstructionsToLastAddedRover", () => {
+  it("if valid instructions, should break down the instructions and send one-by-one to rover", () => {
+    const controller = new Controller();
+    controller.addNewRoverWithInitialPosition("1 2 N");
+    expect(controller.rovers.length).toEqual(1);
 
-  expect(controller.rovers.length).toEqual(1);
+    const spy = jest.spyOn(controller.rovers[0], "processInstruction");
 
-  const instruction = "LMLMLMLMM";
-  const spy = jest.spyOn(controller.rovers[0], "receiveInstructions");
+    controller.sendInstructionsToLastAddedRover("LML");
+    expect(spy).toHaveBeenCalledTimes(3);
+  });
 
-  controller.sendInstructionsToLastAddedRover(instruction);
-  expect(spy).toBeCalledWith(instruction);
+  it('invalid state - no rovers added', () => {
+    const controller = new Controller();
+    expect(controller.rovers.length).toEqual(0);
+
+    const testFunc = () => controller.sendInstructionsToLastAddedRover("LML");
+    expect(testFunc).toThrowError('No rover');
+  });
 });
 
 it("printRoverPositions", () => {

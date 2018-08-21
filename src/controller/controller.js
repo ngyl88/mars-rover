@@ -1,6 +1,7 @@
 const {
   getCoordinateFromString,
-  getCoordinateAndOrientationFromString
+  getCoordinateAndOrientationFromString,
+  readInstructionsToArray
 } = require("../utils");
 
 const Plateau = require("../plateau/plateau");
@@ -27,7 +28,16 @@ class Controller {
   }
 
   sendInstructionsToLastAddedRover(instructions) {
-    this.rovers[this.rovers.length - 1].receiveInstructions(instructions);
+    if(this.rovers.length === 0) {
+      throw new Error('No rover. Please add rover!');
+    }
+
+    const targetRover = this.rovers[this.rovers.length - 1];
+
+    const instructionArray = readInstructionsToArray(instructions);
+    instructionArray.forEach(instruction => {
+      targetRover.processInstruction(instruction);
+    });
   }
 
   printRoverPositions() {
