@@ -1,6 +1,11 @@
 const { isValidOrientation } = require("./orientation");
 
 const readInstructionsToArray = string => {
+  const acceptableRegex = RegExp('^[LMR]*$');
+
+  if (!acceptableRegex.test(string)) {
+    throw new Error("Invalid Instructions!");
+  }
   return string.split("");
 };
 
@@ -35,7 +40,10 @@ const getCoordinateAndOrientationFromString = positionString => {
     throw error;
   }
 
-  const coordinateString = positionString.slice(0, positionString.lastIndexOf(" "));
+  const coordinateString = positionString.slice(
+    0,
+    positionString.lastIndexOf(" ")
+  );
   return {
     coordinate: getCoordinateFromString(coordinateString),
     orientation: inputArray[2]

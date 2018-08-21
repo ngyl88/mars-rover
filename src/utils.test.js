@@ -9,8 +9,9 @@ describe("readInstructionsToArray", () => {
     expect(readInstructionsToArray("LMR")).toEqual(["L", "M", "R"]);
   });
 
-  it.skip("invalid instructions", () => {
-    expect(1).toBe(1);
+  it("invalid instructions", () => {
+    const testFunc = () => readInstructionsToArray("NLMR");
+    expect(testFunc).toThrowError("Invalid");
   });
 });
 
