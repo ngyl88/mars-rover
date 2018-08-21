@@ -1,5 +1,17 @@
 const { NORTH, SOUTH, EAST, WEST } = require("../orientation");
 
+const compass = [NORTH, EAST, SOUTH, WEST];
+
+const rotateLeft = currentOrientation => {
+  if (currentOrientation === NORTH) return WEST;
+  return compass[compass.indexOf(currentOrientation) - 1];
+};
+
+const rotateRight = currentOrientation => {
+  if (currentOrientation === WEST) return NORTH;
+  return compass[compass.indexOf(currentOrientation) + 1];
+};
+
 class Rover {
   constructor(x, y, orientation) {
     this.x = x;
@@ -14,50 +26,16 @@ class Rover {
   processInstruction(instruction) {
     switch (instruction) {
       case "L":
-        this.rotateLeft();
+        this.orientation = rotateLeft(this.orientation);
         break;
       case "R":
-        this.rotateRight();
+        this.orientation = rotateRight(this.orientation);
         break;
       case "M":
         this.move();
         break;
       default:
         throw new Error("Invalid instruction");
-    }
-  }
-
-  rotateLeft() {
-    switch (this.orientation) {
-      case NORTH:
-        this.orientation = WEST;
-        break;
-      case SOUTH:
-        this.orientation = EAST;
-        break;
-      case EAST:
-        this.orientation = NORTH;
-        break;
-      case WEST:
-        this.orientation = SOUTH;
-        break;
-    }
-  }
-
-  rotateRight() {
-    switch (this.orientation) {
-      case NORTH:
-        this.orientation = EAST;
-        break;
-      case SOUTH:
-        this.orientation = WEST;
-        break;
-      case EAST:
-        this.orientation = SOUTH;
-        break;
-      case WEST:
-        this.orientation = NORTH;
-        break;
     }
   }
 
