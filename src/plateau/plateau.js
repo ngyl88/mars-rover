@@ -1,7 +1,6 @@
 class Plateau {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
+  constructor(boundaryLocation) {
+    this.boundary = boundaryLocation;
   }
 }
 

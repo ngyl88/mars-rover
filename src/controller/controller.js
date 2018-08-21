@@ -14,8 +14,8 @@ class Controller {
   }
 
   savePlateauInformation(plateauSizing) {
-    const maxCoordinate = getLocationFromString(plateauSizing);
-    this.plateau = new Plateau(maxCoordinate.x, maxCoordinate.y);
+    const boundaryLocation = getLocationFromString(plateauSizing);
+    this.plateau = new Plateau(boundaryLocation);
   }
 
   addNewRoverWithInitialPosition(position) {
