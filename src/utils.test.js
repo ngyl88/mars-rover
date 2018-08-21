@@ -1,7 +1,7 @@
 const {
   readInstructionsToArray,
-  getCoordinateFromString,
-  getCoordinateAndOrientationFromString
+  getLocationFromString,
+  getLocationAndOrientationFromString
 } = require("./utils");
 
 describe("readInstructionsToArray", () => {
@@ -15,40 +15,40 @@ describe("readInstructionsToArray", () => {
   });
 });
 
-describe("getCoordinateFromString", () => {
+describe("getLocationFromString", () => {
   it("if valid, should return coordinate", () => {
-    expect(getCoordinateFromString("5 5")).toEqual({ x: 5, y: 5 });
+    expect(getLocationFromString("5 5")).toEqual({ x: 5, y: 5 });
   });
 
   describe("invalid input", () => {
     it("if size have more than 2 spaces", () => {
-      const testFunc = () => getCoordinateFromString("5 5 5");
+      const testFunc = () => getLocationFromString("5 5 5");
       expect(testFunc).toThrowError("Invalid");
     });
   });
 });
 
-describe("getCoordinateAndOrientationFromString", () => {
+describe("getLocationAndOrientationFromString", () => {
   it("if valid, should return coordinate and orientation", () => {
-    expect(getCoordinateAndOrientationFromString("1 2 N")).toEqual({
-      coordinate: { x: 1, y: 2 },
+    expect(getLocationAndOrientationFromString("1 2 N")).toEqual({
+      location: { x: 1, y: 2 },
       orientation: "N"
     });
   });
 
   describe("invalid input", () => {
     it("if position entered not having 2 spaces", () => {
-      const testFunc = () => getCoordinateAndOrientationFromString("1 2 N N");
+      const testFunc = () => getLocationAndOrientationFromString("1 2 N N");
       expect(testFunc).toThrowError("Invalid");
     });
 
     it("if position does not start with a valid coordinates", () => {
-      const testFunc = () => getCoordinateAndOrientationFromString("N 2 N");
+      const testFunc = () => getLocationAndOrientationFromString("N 2 N");
       expect(testFunc).toThrowError("Invalid");
     });
 
     it("if position does not end with a valid orientation", () => {
-      const testFunc = () => getCoordinateAndOrientationFromString("5 5 SW");
+      const testFunc = () => getLocationAndOrientationFromString("5 5 SW");
       expect(testFunc).toThrowError("Invalid");
     });
   });

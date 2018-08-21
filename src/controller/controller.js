@@ -1,6 +1,6 @@
 const {
-  getCoordinateFromString,
-  getCoordinateAndOrientationFromString,
+  getLocationFromString,
+  getLocationAndOrientationFromString,
   readInstructionsToArray
 } = require("../utils");
 
@@ -14,17 +14,13 @@ class Controller {
   }
 
   savePlateauInformation(plateauSizing) {
-    const maxCoordinate = getCoordinateFromString(plateauSizing);
+    const maxCoordinate = getLocationFromString(plateauSizing);
     this.plateau = new Plateau(maxCoordinate.x, maxCoordinate.y);
   }
 
   addNewRoverWithInitialPosition(position) {
-    const translated = getCoordinateAndOrientationFromString(position);
-
-    const coordinate = translated.coordinate;
-    const orientation = translated.orientation;
-
-    this.rovers.push(new Rover(coordinate.x, coordinate.y, orientation));
+    const parsed = getLocationAndOrientationFromString(position);
+    this.rovers.push(new Rover(parsed.location, parsed.orientation));
   }
 
   sendInstructionsToLastAddedRover(instructions) {
