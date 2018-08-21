@@ -3,8 +3,8 @@ const {
   getCoordinateAndOrientationFromString
 } = require("../utils");
 
-const Plateau = require("../plateau1/plateau");
-const Rover = require("../rover1/rover");
+const Plateau = require("../plateau/plateau");
+const Rover = require("../rover/rover");
 
 class Controller {
   constructor() {

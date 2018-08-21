@@ -1,5 +1,5 @@
 const { getUserInput, rl } = require("./readline-helper");
-const Controller = require("./src/controller1/controller");
+const Controller = require("./src/controller/controller");
 
 const main = async () => {
   const controller = new Controller();
