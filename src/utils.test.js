@@ -16,7 +16,7 @@ describe("readInstructionsToArray", () => {
 });
 
 describe("getLocationFromString", () => {
-  it("if valid, should return coordinate", () => {
+  it("if valid, should return location", () => {
     expect(getLocationFromString("5 5")).toEqual({ x: 5, y: 5 });
   });
 
@@ -29,7 +29,7 @@ describe("getLocationFromString", () => {
 });
 
 describe("getLocationAndOrientationFromString", () => {
-  it("if valid, should return coordinate and orientation", () => {
+  it("if valid, should return location and orientation", () => {
     expect(getLocationAndOrientationFromString("1 2 N")).toEqual({
       location: { x: 1, y: 2 },
       orientation: "N"
