@@ -1,5 +1,5 @@
 const { LEFT, RIGHT, MOVE } = require("../command");
-const { rotateLeft, rotateRight } = require("../orientation");
+const { rotate } = require("../orientation");
 
 class Rover {
   constructor(location, orientation) {
@@ -12,10 +12,8 @@ class Rover {
   }
 
   processInstruction(instruction) {
-    if (instruction === LEFT) {
-      this.orientation = rotateLeft(this.orientation);
-    } else if (instruction === RIGHT) {
-      this.orientation = rotateRight(this.orientation);
+    if (instruction === LEFT || instruction === RIGHT) {
+      this.orientation = rotate(instruction, this.orientation);
     } else if (instruction === MOVE) {
       this.location = this.location.forward(this.orientation);
     } else {

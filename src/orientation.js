@@ -1,3 +1,5 @@
+const { LEFT, RIGHT } = require("./command");
+
 const NORTH = "N";
 const SOUTH = "S";
 const EAST = "E";
@@ -19,12 +21,17 @@ const rotateRight = currentOrientation => {
   return COMPASS[COMPASS.indexOf(currentOrientation) + 1];
 };
 
+const rotate = (command, currentOrientation) => {
+  if(command === LEFT) return rotateLeft(currentOrientation);
+  if(command === RIGHT) return rotateRight(currentOrientation);
+  throw new Error("Invalid rotate instruction!");
+};
+
 module.exports = {
   NORTH,
   SOUTH,
   EAST,
   WEST,
   isValidOrientation,
-  rotateLeft,
-  rotateRight
+  rotate
 };
