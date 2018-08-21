@@ -1,16 +1,4 @@
-const { NORTH, SOUTH, EAST, WEST } = require("../orientation");
-
-const compass = [NORTH, EAST, SOUTH, WEST];
-
-const rotateLeft = currentOrientation => {
-  if (currentOrientation === NORTH) return WEST;
-  return compass[compass.indexOf(currentOrientation) - 1];
-};
-
-const rotateRight = currentOrientation => {
-  if (currentOrientation === WEST) return NORTH;
-  return compass[compass.indexOf(currentOrientation) + 1];
-};
+const { NORTH, SOUTH, EAST, WEST, rotateLeft, rotateRight } = require("../orientation");
 
 const move = (currentOrientation, x, y) => {
   const newPosition = { x, y };
@@ -52,7 +40,7 @@ class Rover {
         break;
       case "M":
         const newPosition = move(this.orientation, this.x, this.y);
-        
+
         this.x = newPosition.x;
         this.y = newPosition.y;
         break;

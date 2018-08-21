@@ -1,15 +1,30 @@
-const orientation = {
-  NORTH: "N",
-  SOUTH: "S",
-  EAST: "E",
-  WEST: "W"
-}
+const NORTH = "N";
+const SOUTH = "S";
+const EAST = "E";
+const WEST = "W";
+
+const COMPASS = [NORTH, EAST, SOUTH, WEST];
 
 const isValidOrientation = input => {
-  return Object.values(orientation).indexOf(input) !== -1;
+  return COMPASS.indexOf(input) !== -1;
+};
+
+const rotateLeft = currentOrientation => {
+  if (currentOrientation === NORTH) return WEST;
+  return COMPASS[COMPASS.indexOf(currentOrientation) - 1];
+};
+
+const rotateRight = currentOrientation => {
+  if (currentOrientation === WEST) return NORTH;
+  return COMPASS[COMPASS.indexOf(currentOrientation) + 1];
 };
 
 module.exports = {
-  ...orientation,
-  isValidOrientation
+  NORTH,
+  SOUTH,
+  EAST,
+  WEST,
+  isValidOrientation,
+  rotateLeft,
+  rotateRight
 };
