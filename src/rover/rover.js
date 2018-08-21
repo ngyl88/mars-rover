@@ -1,4 +1,6 @@
-const { NORTH, SOUTH, EAST, WEST, rotateLeft, rotateRight } = require("../orientation");
+const { LEFT, RIGHT, MOVE } = require("../command");
+const { rotateLeft, rotateRight } = require("../orientation");
+const { NORTH, SOUTH, EAST, WEST } = require("../orientation");
 
 const move = (currentOrientation, x, y) => {
   const newPosition = { x, y };
@@ -31,21 +33,16 @@ class Rover {
   }
 
   processInstruction(instruction) {
-    switch (instruction) {
-      case "L":
-        this.orientation = rotateLeft(this.orientation);
-        break;
-      case "R":
-        this.orientation = rotateRight(this.orientation);
-        break;
-      case "M":
-        const newPosition = move(this.orientation, this.x, this.y);
-
-        this.x = newPosition.x;
-        this.y = newPosition.y;
-        break;
-      default:
-        throw new Error("Invalid instruction");
+    if (instruction === LEFT) {
+      this.orientation = rotateLeft(this.orientation);
+    } else if (instruction === RIGHT) {
+      this.orientation = rotateRight(this.orientation);
+    } else if (instruction === MOVE) {
+      const newPosition = move(this.orientation, this.x, this.y);
+      this.x = newPosition.x;
+      this.y = newPosition.y;
+    } else {
+      throw new Error("Invalid instruction");
     }
   }
 }
