@@ -12,6 +12,25 @@ const rotateRight = currentOrientation => {
   return compass[compass.indexOf(currentOrientation) + 1];
 };
 
+const move = (currentOrientation, x, y) => {
+  const newPosition = { x, y };
+  switch (currentOrientation) {
+    case NORTH:
+      newPosition.y += 1;
+      break;
+    case SOUTH:
+      newPosition.y -= 1;
+      break;
+    case EAST:
+      newPosition.x += 1;
+      break;
+    case WEST:
+      newPosition.x -= 1;
+      break;
+  }
+  return newPosition;
+};
+
 class Rover {
   constructor(x, y, orientation) {
     this.x = x;
@@ -32,27 +51,13 @@ class Rover {
         this.orientation = rotateRight(this.orientation);
         break;
       case "M":
-        this.move();
+        const newPosition = move(this.orientation, this.x, this.y);
+        
+        this.x = newPosition.x;
+        this.y = newPosition.y;
         break;
       default:
         throw new Error("Invalid instruction");
-    }
-  }
-
-  move() {
-    switch (this.orientation) {
-      case NORTH:
-        this.y += 1;
-        break;
-      case SOUTH:
-        this.y -= 1;
-        break;
-      case EAST:
-        this.x += 1;
-        break;
-      case WEST:
-        this.x -= 1;
-        break;
     }
   }
 }
