@@ -1,4 +1,4 @@
-const Rover = require("./Rover");
+const Rover = require("./rover");
 
 it("Rover constructor", () => {
   const rover = new Rover(0, 0, "N");

@@ -1,4 +1,4 @@
-const Controller = require("./Controller");
+const Controller = require("./controller");
 
 it("Controller constructor", () => {
   const controller = new Controller();
