@@ -5,9 +5,13 @@ class Plateau {
   }
 
   addBeacon(position) {
-    if (this.beacons.indexOf(position) === -1) {
+    if (!this.isBeaconExist(position)) {
       this.beacons.push(position);
     }
+  }
+
+  isBeaconExist(position) {
+    return this.beacons.indexOf(position) !== -1;
   }
 }
 

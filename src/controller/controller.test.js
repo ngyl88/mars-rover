@@ -68,12 +68,6 @@ describe("sendInstructionsToLastAddedRover", () => {
         controller.plateau
       );
     });
-
-    it("if valid instructions but rover is rip, should not send instruction to rover", () => {
-      controller.rovers[0].rip = true;
-      controller.sendInstructionsToLastAddedRover("LML");
-      expect(spyOnProcessInstruction).toHaveBeenCalledTimes(0);
-    });
   });
 });
 

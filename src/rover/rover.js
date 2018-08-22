@@ -18,10 +18,12 @@ class Rover {
   }
 
   processInstruction(instruction, plateau) {
+    if (this.rip) return;
+    
     if (instruction === LEFT || instruction === RIGHT) {
       this.orientation = rotate(instruction, this.orientation);
     } else if (instruction === MOVE) {
-      if (plateau.beacons.indexOf(this.lastPosition) !== -1) return;
+      if (plateau.isBeaconExist(this.lastPosition)) return;
 
       const safe = this.location.forward(this.orientation, plateau.boundary);
       if (!safe) {

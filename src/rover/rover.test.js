@@ -48,6 +48,17 @@ describe("processInstruction - Single Instruction", () => {
     plateau11 = new Plateau(boundary11);
   });
 
+  it("if rip, do nothing", () => {
+    const plateau = plateau22;
+    let rover = new Rover(location00, "N");
+    rover.processInstruction("M", plateau);
+
+    const spyOnPlateauBeaconCheck = jest.spyOn(plateau, "isBeaconExist");
+    spyOnPlateauBeaconCheck.mockImplementation();
+
+    expect(spyOnPlateauBeaconCheck).not.toHaveBeenCalled();
+  });
+
   describe("state change after L:", () => {
     it("current orientation: N", () => {
       let rover = new Rover(location00, "N");
