@@ -1,15 +1,32 @@
 const { NORTH, SOUTH, EAST, WEST } = require("./orientation");
 
-const handleMovementX = (orientation, x, maxX) => {
-  if (orientation === EAST) return x + 1 > maxX ? 0 : 1;
-  if (orientation === WEST) return x - 1 < 0 ? 0 : -1;
-  throw new Error("Invalid X Movement");
+const getPositiveMovement = (newXY, maxXY) => {
+  return newXY > maxXY ? 0 : 1;
 };
 
-const handleMovementY = (orientation, y, maxY) => {
-  if (orientation === NORTH) return y + 1 > maxY ? 0 : 1;
-  if (orientation === SOUTH) return y - 1 < 0 ? 0 : -1;
-  throw new Error("Invalid Y Movement");
+const getNegativeMovement = (newXY) => {
+  return newXY < 0 ? 0 : -1;
+};
+
+const handleMovement = (orientation, currentLocation, boundaryLocation) => {
+  const maxX = boundaryLocation.x;
+  const maxY = boundaryLocation.y;
+
+  const movement = { x: 0, y: 0 };
+
+  if (orientation === NORTH) {
+    movement.y = getPositiveMovement(currentLocation.y + 1, maxY);
+  } else if (orientation === EAST) {
+    movement.x = getPositiveMovement(currentLocation.x + 1, maxX);
+  } else if (orientation === SOUTH) {
+    movement.y = getNegativeMovement(currentLocation.y - 1);
+  } else if (orientation === WEST) {
+    movement.x = getNegativeMovement(currentLocation.x - 1);
+  } else {
+    throw new Error(`Unidentified orientation: ${orientation}`);
+  }
+
+  return movement;
 };
 
 class Location {
@@ -19,18 +36,12 @@ class Location {
   }
 
   forward(orientation, boundaryLocation) {
-    if (orientation === NORTH || orientation === SOUTH) {
-      const movement = handleMovementY(orientation, this.y, boundaryLocation.y);
+    const movement = handleMovement(orientation, this, boundaryLocation);
 
-      if (movement === 0) return false;
-      this.y += movement;
-    }
-    if (orientation === EAST || orientation === WEST) {
-      const movement = handleMovementX(orientation, this.x, boundaryLocation.x);
+    if (movement.x === 0 && movement.y === 0) return false;
 
-      if (movement === 0) return false;
-      this.x += movement;
-    }
+    this.x += movement.x;
+    this.y += movement.y;
     return true;
   }
 }
