@@ -8,17 +8,23 @@ class Rover {
     this.rip = false;
   }
 
+  get lastPosition() {
+    return `${this.location.x} ${this.location.y} ${this.orientation}`;
+  }
+
   printCurrentPosition() {
     const ripString = this.rip ? " RIP" : '';
-    return `${this.location.x} ${this.location.y} ${this.orientation}` + ripString;
+    return `${this.lastPosition}` + ripString;
   }
 
   processInstruction(instruction, boundaryLocation) {
     if (instruction === LEFT || instruction === RIGHT) {
       this.orientation = rotate(instruction, this.orientation);
+      return true;
     } else if (instruction === MOVE) {
       const safe = this.location.forward(this.orientation, boundaryLocation);
       this.rip = !safe;
+      return safe;
     } else {
       throw new Error("Invalid instruction");
     }

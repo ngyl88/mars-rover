@@ -20,6 +20,11 @@ it("Rover constructor", () => {
   expect(rover.orientation).toBe("N");
 });
 
+it("Getter lastPosition", () => {
+  const rover = new Rover(location00, "N");
+  expect(rover.lastPosition).toBe("0 0 N");
+});
+
 describe("printCurrentPosition()", () => {
   it("if not rip", () => {
     const rover = new Rover(location00, "N");
@@ -34,7 +39,7 @@ describe("printCurrentPosition()", () => {
 });
 
 describe("processInstruction - Single Instruction", () => {
-  describe("L:", () => {
+  describe("state change after L:", () => {
     it("current orientation: N", () => {
       let rover = new Rover(location00, "N");
       rover.processInstruction("L", boundary22);
@@ -64,7 +69,7 @@ describe("processInstruction - Single Instruction", () => {
     });
   });
 
-  describe("R:", () => {
+  describe("state change after R:", () => {
     it("current orientation: N", () => {
       let rover = new Rover(location00, "N");
       rover.processInstruction("R", boundary22);
@@ -94,7 +99,7 @@ describe("processInstruction - Single Instruction", () => {
     });
   });
 
-  describe("M:", () => {
+  describe("state change after M:", () => {
     describe("within boundary", () => {
       it("current orientation: N", () => {
         let rover = new Rover(location00, "N");
@@ -161,6 +166,36 @@ describe("processInstruction - Single Instruction", () => {
         expect(rover.printCurrentPosition()).toBe("0 0 W RIP");
         expect(rover.rip).toBe(true);
       });
+    });
+  });
+
+  describe('return value of L/R/M', () => {
+    it("L", () => {
+      let rover = new Rover(location00, "N");
+      const returnValue = rover.processInstruction("L", boundary22);
+
+      expect(returnValue).toBe(true);
+    });
+
+    it("R", () => {
+      let rover = new Rover(location00, "N");
+      const returnValue = rover.processInstruction("R", boundary22);
+
+      expect(returnValue).toBe(true);
+    });
+
+    it("M, within boundary", () => {
+      let rover = new Rover(location00, "N");
+      const returnValue = rover.processInstruction("M", boundary22);
+
+      expect(returnValue).toBe(true);
+    });
+
+    it("M, beyond boundary", () => {
+      let rover = new Rover(location11, "N");
+      const returnValue = rover.processInstruction("M", boundary11);
+
+      expect(returnValue).toBe(false);
     });
   });
 });
