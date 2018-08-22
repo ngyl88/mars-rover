@@ -5,17 +5,20 @@ class Rover {
   constructor(location, orientation) {
     this.location = location;
     this.orientation = orientation;
+    this.rip = false;
   }
 
   printCurrentPosition() {
-    return `${this.location.x} ${this.location.y} ${this.orientation}`;
+    const ripString = this.rip ? " RIP" : '';
+    return `${this.location.x} ${this.location.y} ${this.orientation}` + ripString;
   }
 
-  processInstruction(instruction) {
+  processInstruction(instruction, boundaryLocation) {
     if (instruction === LEFT || instruction === RIGHT) {
       this.orientation = rotate(instruction, this.orientation);
     } else if (instruction === MOVE) {
-      this.location = this.location.forward(this.orientation);
+      const safe = this.location.forward(this.orientation, boundaryLocation);
+      this.rip = !safe;
     } else {
       throw new Error("Invalid instruction");
     }

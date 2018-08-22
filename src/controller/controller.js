@@ -32,7 +32,9 @@ class Controller {
 
     const instructionArray = readInstructionsToArray(instructions);
     instructionArray.forEach(instruction => {
-      targetRover.processInstruction(instruction);
+      if(!targetRover.rip) {
+        targetRover.processInstruction(instruction, this.plateau.boundary);
+      }
     });
   }
 

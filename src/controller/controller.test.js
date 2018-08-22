@@ -35,6 +35,39 @@ describe("sendInstructionsToLastAddedRover", () => {
     spyOnProcessInstruction.mockRestore();
   });
 
+  it("if valid instruction and rover is not rip, should send instruction and plateau boundary to rover", () => {
+    const controller = new Controller();
+    controller.savePlateauInformation("5 5");
+    expect(controller.plateau.boundary).toBeDefined();
+
+    controller.addNewRoverWithInitialPosition("1 2 N");
+    expect(controller.rovers.length).toEqual(1);
+
+    const instruction = "M";
+    const spyOnProcessInstruction = jest.spyOn(controller.rovers[0], "processInstruction");
+    spyOnProcessInstruction.mockImplementation();
+    
+    controller.sendInstructionsToLastAddedRover(instruction);
+    expect(spyOnProcessInstruction).toHaveBeenCalledWith(instruction, controller.plateau.boundary);
+
+    spyOnProcessInstruction.mockRestore();
+  });
+
+  it("if valid instructions but rover is rip, should not send instruction to rover", () => {
+    const controller = new Controller();
+    controller.addNewRoverWithInitialPosition("1 2 N");
+    expect(controller.rovers.length).toEqual(1);
+
+    const spyOnProcessInstruction = jest.spyOn(controller.rovers[0], "processInstruction");
+    spyOnProcessInstruction.mockImplementation();
+    
+    controller.rovers[0].rip = true;
+    controller.sendInstructionsToLastAddedRover("LML");
+    expect(spyOnProcessInstruction).toHaveBeenCalledTimes(0);
+
+    spyOnProcessInstruction.mockRestore();
+  });
+
   it('invalid state - no rovers added', () => {
     const controller = new Controller();
     expect(controller.rovers.length).toEqual(0);
