@@ -25,7 +25,7 @@ class Rover {
     } else if (instruction === MOVE) {
       if (plateau.isBeaconExist(this.lastPosition)) return;
 
-      const safe = this.location.forward(this.orientation, plateau.boundary);
+      const safe = this.location.forward(this.orientation, plateau);
       if (!safe) {
         plateau.addBeacon(this.lastPosition);
         this.rip = true;
