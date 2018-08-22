@@ -24,16 +24,17 @@ class Controller {
   }
 
   sendInstructionsToLastAddedRover(instructions) {
-    if(this.rovers.length === 0) {
-      throw new Error('No rover. Please add rover!');
+    if (this.rovers.length === 0) {
+      throw new Error("No rover. Please add rover!");
     }
 
     const targetRover = this.rovers[this.rovers.length - 1];
 
     const instructionArray = readInstructionsToArray(instructions);
     instructionArray.forEach(instruction => {
-      if(!targetRover.rip) {
-        targetRover.processInstruction(instruction, this.plateau.boundary);
+      if (!targetRover.rip) {
+        const safe = targetRover.processInstruction(instruction, this.plateau.boundary);
+        if (!safe) this.plateau.addBeacon(targetRover.lastPosition);
       }
     });
   }
