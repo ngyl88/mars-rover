@@ -80,7 +80,7 @@ describe("processInstruction - Single Instruction", () => {
     });
   });
 
-  describe("M:", () => {
+  describe.skip("M:", () => {
     it("current orientation: N", () => {
       let rover = new Rover(location00, "N");
       rover.processInstruction("M");

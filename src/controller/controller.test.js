@@ -26,10 +26,13 @@ describe("sendInstructionsToLastAddedRover", () => {
     controller.addNewRoverWithInitialPosition("1 2 N");
     expect(controller.rovers.length).toEqual(1);
 
-    const spy = jest.spyOn(controller.rovers[0], "processInstruction");
+    const spyOnProcessInstruction = jest.spyOn(controller.rovers[0], "processInstruction");
+    spyOnProcessInstruction.mockImplementation();
 
     controller.sendInstructionsToLastAddedRover("LML");
-    expect(spy).toHaveBeenCalledTimes(3);
+    expect(spyOnProcessInstruction).toHaveBeenCalledTimes(3);
+
+    spyOnProcessInstruction.mockRestore();
   });
 
   it('invalid state - no rovers added', () => {
