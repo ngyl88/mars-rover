@@ -14,27 +14,45 @@ const main = async () => {
       controller.savePlateauInformation(plateauSizeInput);
       isPlateauCreated = true;
     } catch (err) {
-      console.error(err.message);
+      console.log('-->', err.message);
     }
   }
 
   // TODO test for while loop?
   let toCreateAnotherRover = true;
   while (toCreateAnotherRover) {
-    const initialPosition = await getUserInput(
-      "Specify the initial coordinates and direction of the mars rover (e.g. 1 2 N):"
-    );
+    let isInitialPositionAccepted = false;
+    while (!isInitialPositionAccepted) {
+      const initialPosition = await getUserInput(
+        "Specify the initial coordinates and direction of the mars rover (e.g. 1 2 N):"
+      );
 
-    const instructions = await getUserInput(
-      "Specify the instructions for the mars rover (e.g. LMLMLMLMM):"
-    );
+      // TODO: include the functions that you've implemented for this kata
+      try {
+        controller.addNewRoverWithInitialPosition(initialPosition);
+        isInitialPositionAccepted = true;
+      } catch (error) {
+        console.log('-->', error.message);
+      }
+    }
 
-    // TODO: include the functions that you've implemented for this kata
-    controller.addNewRoverWithInitialPosition(initialPosition);
-    controller.sendInstructionsToLastAddedRover(instructions);
+    let isInstructionAccepted = false;
+    while (!isInstructionAccepted) {
+      const instructions = await getUserInput(
+        "Specify the instructions for the mars rover (e.g. LMLMLMLMM):"
+      );
+
+      // TODO: include the functions that you've implemented for this kata
+      try {
+        controller.sendInstructionsToLastAddedRover(instructions);
+        isInstructionAccepted = true;
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
 
     const anotherRover = await getUserInput("Another mars rover (Y/N)? ");
-    toCreateAnotherRover = anotherRover === "Y";
+    toCreateAnotherRover = anotherRover.toUpperCase() === "Y";
   }
 
   console.log(
