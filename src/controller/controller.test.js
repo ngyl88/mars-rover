@@ -65,7 +65,7 @@ describe("sendInstructionsToLastAddedRover", () => {
 
       expect(spyOnProcessInstruction).toHaveBeenCalledWith(
         instruction,
-        controller.plateau.boundary
+        controller.plateau
       );
     });
 
@@ -73,33 +73,6 @@ describe("sendInstructionsToLastAddedRover", () => {
       controller.rovers[0].rip = true;
       controller.sendInstructionsToLastAddedRover("LML");
       expect(spyOnProcessInstruction).toHaveBeenCalledTimes(0);
-    });
-
-    describe("call plateau to addBeacon based on return value from rover", () => {
-      let spyOnPlateauAddBeacon = null;
-
-      beforeEach(() => {
-        spyOnPlateauAddBeacon = jest.spyOn(controller.plateau, "addBeacon");
-        spyOnPlateauAddBeacon.mockImplementation();
-      });
-
-      afterEach(() => {
-        spyOnPlateauAddBeacon.mockRestore();
-      });
-
-      it("should call addBeacon when rover return false", () => {
-        spyOnProcessInstruction.mockImplementation(() => false);
-
-        controller.sendInstructionsToLastAddedRover("LML");
-        expect(spyOnPlateauAddBeacon).toBeCalledWith("1 2 N");
-      });
-
-      it("should not call addBeacon when rover return true", () => {
-        spyOnProcessInstruction.mockImplementation(() => true);
-
-        controller.sendInstructionsToLastAddedRover("LML");
-        expect(spyOnPlateauAddBeacon).not.toHaveBeenCalled();
-      });
     });
   });
 });

@@ -17,14 +17,15 @@ class Rover {
     return `${this.lastPosition}` + ripString;
   }
 
-  processInstruction(instruction, boundaryLocation) {
+  processInstruction(instruction, plateau) {
     if (instruction === LEFT || instruction === RIGHT) {
       this.orientation = rotate(instruction, this.orientation);
-      return true;
     } else if (instruction === MOVE) {
-      const safe = this.location.forward(this.orientation, boundaryLocation);
-      this.rip = !safe;
-      return safe;
+      const safe = this.location.forward(this.orientation, plateau.boundary);
+      if (!safe) {
+        plateau.addBeacon(this.lastPosition);
+        this.rip = true;
+      }
     } else {
       throw new Error("Invalid instruction");
     }

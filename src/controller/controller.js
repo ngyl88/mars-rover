@@ -33,8 +33,7 @@ class Controller {
     const instructionArray = readInstructionsToArray(instructions);
     instructionArray.forEach(instruction => {
       if (!targetRover.rip) {
-        const safe = targetRover.processInstruction(instruction, this.plateau.boundary);
-        if (!safe) this.plateau.addBeacon(targetRover.lastPosition);
+        targetRover.processInstruction(instruction, this.plateau);
       }
     });
   }
