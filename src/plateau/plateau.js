@@ -13,6 +13,15 @@ class Plateau {
   isBeaconExist(position) {
     return this.beacons.indexOf(position) !== -1;
   }
+
+  isLocationOutOfBound(location) {
+    return (
+      location.x > this.boundary.x ||
+      location.y > this.boundary.y ||
+      location.x < 0 ||
+      location.y < 0
+    );
+  }
 }
 
 module.exports = Plateau;

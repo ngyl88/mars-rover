@@ -20,6 +20,9 @@ class Controller {
 
   addNewRoverWithInitialPosition(position) {
     const parsed = getLocationAndOrientationFromString(position);
+    if (this.plateau.isLocationOutOfBound(parsed.location)) {
+      throw new Error("Initial Coordinate is outside of plateau!");
+    }
     this.rovers.push(new Rover(parsed.location, parsed.orientation));
   }
 

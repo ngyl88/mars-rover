@@ -15,9 +15,18 @@ it("savePlateauInformation", () => {
 
 it("addNewRoverWithInitialPosition", () => {
   const controller = new Controller();
+  controller.savePlateauInformation("5 5");
   controller.addNewRoverWithInitialPosition("5 5 S");
 
   expect(controller.rovers.length).toEqual(1);
+});
+
+it("addNewRoverWithInitialPosition, out of bound", () => {
+  const controller = new Controller();
+  controller.savePlateauInformation("5 5");
+  const testFunc = () => controller.addNewRoverWithInitialPosition("6 6 S");
+
+  expect(testFunc).toThrowError();
 });
 
 describe("sendInstructionsToLastAddedRover", () => {
@@ -73,6 +82,7 @@ describe("sendInstructionsToLastAddedRover", () => {
 
 it("printRoverPositions", () => {
   const controller = new Controller();
+  controller.savePlateauInformation("5 5");
   controller.addNewRoverWithInitialPosition("1 2 N");
   controller.addNewRoverWithInitialPosition("3 4 E");
 
