@@ -21,6 +21,8 @@ class Rover {
     if (instruction === LEFT || instruction === RIGHT) {
       this.orientation = rotate(instruction, this.orientation);
     } else if (instruction === MOVE) {
+      if (plateau.beacons.indexOf(this.lastPosition) !== -1) return;
+
       const safe = this.location.forward(this.orientation, plateau.boundary);
       if (!safe) {
         plateau.addBeacon(this.lastPosition);

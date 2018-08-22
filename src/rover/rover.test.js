@@ -43,7 +43,7 @@ describe("printCurrentPosition()", () => {
 describe("processInstruction - Single Instruction", () => {
   let plateau22, plateau11;
 
-  beforeAll(() => {
+  beforeEach(() => {
     plateau22 = new Plateau(boundary22);
     plateau11 = new Plateau(boundary11);
   });
@@ -210,5 +210,18 @@ describe("processInstruction - Single Instruction", () => {
       expect(spyOnPlateauAddBeacon).not.toHaveBeenCalled()
       spyOnPlateauAddBeacon.mockRestore();
     });
+  });
+
+  it('should ignore M instruction if beacon exist', () => {
+    const plateau = plateau11;
+    plateau.addBeacon("1 1 N");
+
+    const rover = new Rover(location11, "N");
+    const spyOnLocationForward = jest.spyOn(rover.location, "forward");
+    spyOnLocationForward.mockImplementation();
+
+    rover.processInstruction("M", plateau);
+
+    expect(spyOnLocationForward).not.toHaveBeenCalled();
   });
 });
